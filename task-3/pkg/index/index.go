@@ -2,7 +2,7 @@ package index
 
 // Обратный индекс отсканированных документов.
 
-import "github.com/akekukh/gosearch/task-2/pkg/crawler"
+import "github.com/akekukh/gosearch/task-3/pkg/crawler"
 
 // Interface определяет контракт службы индексирования документов.
 type Interface interface {

@@ -1,7 +1,7 @@
 package hash
 
 import (
-	"github.com/akekukh/gosearch/task-2/pkg/crawler"
+	"github.com/akekukh/gosearch/task-3/pkg/crawler"
 	"reflect"
 	"testing"
 )

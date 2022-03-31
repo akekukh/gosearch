@@ -10,7 +10,7 @@ import (
 
 	"golang.org/x/net/html"
 
-	"github.com/akekukh/gosearch/pkg/crawler"
+	"github.com/akekukh/gosearch/task-3/pkg/crawler"
 )
 
 // Service - служба поискового робота.

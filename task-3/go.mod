@@ -1,4 +1,4 @@
-module github.com/akekukh/gosearch
+module github.com/akekukh/gosearch/task-3
 
 go 1.18
 

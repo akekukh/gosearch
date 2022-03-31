@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"sort"
+	"strings"
 
 	"github.com/akekukh/gosearch/task-2/pkg/crawler"
 	"github.com/akekukh/gosearch/task-2/pkg/crawler/spider"
-	"github.com/akekukh/gosearch/task-2/pkg/index/hash"
 )
 
 func main() {
@@ -17,19 +16,14 @@ func main() {
 	const depth = 3
 	var urls = []string{"https://go.dev", "https://golang.org"}
 	docs := scan(urls, depth)
-	for i := range docs {
-		docs[i].ID = i
-	}
-	sort.Slice(docs, func(i, j int) bool { return docs[i].ID <= docs[j].ID })
-	indexer := index(docs)
 
-	fmt.Println("Scan result: \n", docs)
 	if *word == "" {
+		fmt.Println("Scan result: \n", docs)
 		return
 	}
 
 	fmt.Printf("Search word '%s' in the results:\n", *word)
-	result := find(*word, docs, indexer)
+	result := find(*word, docs)
 	fmt.Println("Find result: \n", result)
 }
 
@@ -49,18 +43,10 @@ func scan(urls []string, depth int) (data []crawler.Document) {
 	return data
 }
 
-func index(docs []crawler.Document) *hash.Index {
-	hash := hash.New()
-	hash.Add(docs)
-	return hash
-}
-
-func find(word string, docs []crawler.Document, indexer *hash.Index) (responses []crawler.Document) {
-	ids := indexer.Search(word)
-	for _, id := range ids {
-		docId := sort.Search(len(docs), func(i int) bool { return docs[i].ID >= id })
-		if docId < len(docs) && docs[docId].ID == id {
-			responses = append(responses, docs[docId])
+func find(word string, docs []crawler.Document) (responses []crawler.Document) {
+	for _, doc := range docs {
+		if strings.Contains(strings.ToLower(doc.Title), strings.ToLower(word)) || strings.Contains(strings.ToLower(doc.URL), strings.ToLower(word)) {
+			responses = append(responses, doc)
 		}
 	}
 	return responses

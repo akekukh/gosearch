@@ -1,7 +1,7 @@
 package membot
 
 import (
-	"github.com/akekukh/gosearch/pkg/crawler"
+	"github.com/akekukh/gosearch/task-3/pkg/crawler"
 )
 
 // Service - имитация служба поискового робота.
